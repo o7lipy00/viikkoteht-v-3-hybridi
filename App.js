@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import React from 'react';
+import { View, Text, StyleSheet} from 'react-native'; // Import necessary components
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import HomeScreen from './screens/HomeScreen';
+import SecondScreen from './screens/SecondScreen';
+import Kustomi from './components/Kustomi';
 
-const styles = StyleSheet.create({
+
+
+
+
+const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
+
+const Stack = createStackNavigator();
+
+export default function App() {//Tämä on sovelluksen pääkomponentti, joka palauttaa koko navigaatiorakenteen.
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home"
+       screenOptions={{
+        header: (props) => <Kustomi {...props} />,
+      }}>
+
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="SecondScreen" component={SecondScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+  
+}
+
